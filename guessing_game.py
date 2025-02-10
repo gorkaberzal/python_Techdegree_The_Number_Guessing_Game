@@ -25,3 +25,4 @@ Project 1 - The Number Guessing Game
 
 
 # Kick off the program by calling the start_game function.
+print("Hello World")
