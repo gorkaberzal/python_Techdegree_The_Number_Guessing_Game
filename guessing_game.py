@@ -7,51 +7,42 @@ Project 1 - The Number Guessing Game
 # Import the random module.
 import random
 
-# Create the start_game function.
-def start_game():
-# Write your code inside this function.
+high_score = 0
 
-#   When the program starts, we want to:
-#   ------------------------------------
-#   1. Display an intro/welcome message to the player.
-    print("------------ Welcome to our Guessing game ------------")
-    
-#   2. Store a random number as the answer/solution.
-    random_number = random.randrange(11)
-#    print("The random number is  {}:  ".format(random_number))
+def start_game():
+
+    global high_score
+
+    print("\n------------ Welcome to our Guessing game ------------")
+    print("The the current high score is: {} ".format(high_score))
+    random_number = random.randrange(1, 11)
     counter = 0
-#   3. Continuously prompt the player for a guess.
     while True:
         counter += 1
-#     a. If the guess is greater than the solution, display to the player "It's lower".
         try:
-            guessed_number = int(input("Please enter a number between 0 and 10 "))
-            if (guessed_number > 10 ):
+            guessed_number = int(input("Please enter a number between 1 and 10 "))
+            if (guessed_number > 10 ) or (guessed_number < 1):
+                print("You entered a non valid number outside the range.")
                 continue
-            elif (guessed_number < 0):
-                continue
-        except ValueError:
-#            print(ValueError)
+        except ValueError as e:
+                print("You entered a non valid number between 1 and 10, {} ".format(ValueError))
                 continue
         else: 
             if (guessed_number > random_number):
                 print("It is lower.   ")
-    #     b. If the guess is less than the solution, display to the player "It's higher".
             elif (guessed_number < random_number):
                 print("It is higher.   ")
-    #   4. Once the guess is correct, stop looping, inform the user they "Got it"
             elif (guessed_number == random_number):
                 print("\n--------------- Got It ----------------  ")
-    #      and show how many attempts it took them to get the correct number.
                 print("It took you {}, attempts  ".format(counter))
-                print ("The guessed number was  {},   ".format(guessed_number))
-    #   5. Let the player know the game is ending, or something that indicates the game is over.
-                print("This game is over, thank you for playing   ")
-                break
+                print ("The guessed number was  {}   ".format(guessed_number))
+                if(high_score == 0) or (high_score >= counter):
+                    high_score = counter
+                play_again = input("Would you like to play agian (yes) / (no)   ")       
+                if "yes" != (play_again.lower()):
+                    print("This game is over, thank you for playing, goodbye  ")
+                    break
+                else:
+                    start_game()
 
-            
-# ( You can add more features/enhancements if you'd like to. )
- 
-
-# Kick off the program by calling the start_game function.
 start_game()
