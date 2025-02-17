@@ -39,10 +39,9 @@ def start_game():
                 if(high_score == 0) or (high_score >= counter):
                     high_score = counter
                 play_again = input("Would you like to play agian (yes) / (no)   ")       
-                if "yes" != (play_again.lower()):
-                    print("This game is over, thank you for playing, goodbye  ")
-                    break
-                else:
+                if "yes" == (play_again.lower()):
                     start_game()
-
+                else:
+                    print("This game is over, thank you for playing, goodbye  ")
+                break
 start_game()
